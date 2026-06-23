@@ -1,0 +1,34 @@
+{{ $version := .Site.Params.bootstrap.version | default "latest" -}}
+{{ $cssFile := cond hugo.IsProduction "bootstrap.min.css" "bootstrap.css" -}}
+{{ $jsFile := cond hugo.IsProduction "bootstrap.min.js" "bootstrap.js" -}}
+
+{{ $cssUrl := printf "https://cdn.jsdelivr.net/npm/bootstrap@%s/dist/css/%s" $version $cssFile -}}
+{{ with try (resources.GetRemote $cssUrl) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve Bootstrap css file from CDN. Reason: %s." . -}}
+  {{ else with .Value -}}
+    {{ with resources.Copy (printf "css/%s" $cssFile) . -}}
+      {{ $cssHash := . | fingerprint "sha512" -}}
+      <link rel="stylesheet" href="{{- .RelPermalink -}}" {{/**/ -}}
+          integrity="{{- $cssHash.Data.Integrity -}}" {{/**/ -}}
+          crossorigin="anonymous">{{/**/ -}}
+    {{ end -}}
+  {{ else -}}
+    {{ errorf "Could not retrieve css file %q from CDN. Reason: invalid Bootstrap version %q." $cssUrl $version -}}
+  {{ end -}}
+{{ end -}}
+
+{{ $jsUrl := printf "https://cdn.jsdelivr.net/npm/bootstrap@%s/dist/js/%s" $version $jsFile -}}
+{{ with try (resources.GetRemote $jsUrl) -}}
+  {{ with .Err -}}
+    {{ errorf "Could not retrieve Bootstrap script from CDN. Reason: %s." . -}}
+  {{ end -}}
+{{ else -}}
+  {{ errorf "Invalid Bootstrap version %s, could not retrieve this version from CDN." $version -}}
+{{ end -}}
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap/dist/js/bootstrap.min.js" 
+  integrity="sha512-nKXmKvJyiGQy343jatQlzDprflyB5c+tKCzGP3Uq67v+lmzfnZUi/ZT+fc6ITZfSC5HhaBKUIvr/nTLCV+7F+Q==" crossorigin="anonymous"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"
+  integrity="sha512-eobC7C53oM8WZPUG67FxOpRQFY2R3uX0Lx43wLzpRpJ2OA7mZHNlEM+oqOkcPFDQehFIujT6Ud7CjAQBjvakhA==" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css" rel="stylesheet">

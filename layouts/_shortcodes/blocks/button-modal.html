@@ -1,0 +1,73 @@
+{{ $col_id := .Get "color" | default "dark" -}}
+{{ $height := .Get "height" | default "max" -}}
+
+{{ with .Get "caption" -}}
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bootstrapModal">
+  {{- $caption := . -}}
+  {{ $caption | html -}}
+</button>
+{{ end -}}
+<div class="modal fade" id="bootstrapModal" role="dialog" data-bs-backdrop="true" data-bs-keyboard="false" tabindex="-1" aria-labelledby="boostrapModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              {{ with .Get "title" -}}
+              <h5 class="modal-title fs-5" id="bootstrapModalLabel">{{- $title := . -}}{{ $title | html -}}</h5>
+              {{ end -}}
+              <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <form id="bootstrapModalForm">                
+                {{ .Inner -}}
+                <div class="row mb-4">
+                  <div class="col-sm-12">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text" id="formEmailFromLabel">Email</span>
+                      </div>
+                      <input type="email" id="formEmailFrom" class="form-control" />
+                    </div>
+                    <div class="row">
+                      <div class="col-sm-1"></div>
+                      <div class="col-sm-10">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-check d-flex justify-content-center mb-4">
+                  <input class="form-check-input me-2" type="checkbox" value="" id="bootstrapModalSendCopy" checked />
+                  <label class="form-check-label" for="bootstrapModalSendCopy">
+                      Send me a copy of this message
+                  </label>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+              {{ with .Get "emailTo" -}}
+              <label>Submissions are sent to: </label>
+              <label id="emailTo"><i>{{- $emailTo := . -}}{{ $emailTo | html -}}</i></label>
+              {{ end -}}
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button action="mailto:\\techiee09@gmail.com" type="submit" class="btn btn-primary">Submit</button>
+          </div>
+      </div>
+  </div>
+</div>
+{{/**/ -}}
+
+<script>
+  $(function() {
+    $("#datepicker1").datepicker("setDate", new Date());
+    $('[data-bs-target="#bootstrapModal"]').click(function() {
+      $('#bootstrapModal').appendTo("body").modal('show'); 
+      $('.dropdown-toggle').dropdown();
+    });
+    $('#datepicker1').datepicker({
+          "setDate": new Date(),
+          "autoclose": true
+    });
+  });
+</script>
