@@ -33,7 +33,7 @@ jobs:
 
       - run: npm ci
       - run: >-
-          hugo --baseURL https://${REPO_OWNER}.github.io/${REPO_NAME}
+          hugo --baseURL https://${REPO_OWNER}.github.io
           --minify
 
       - name: Deploy
