@@ -24,7 +24,7 @@ params:
   </a>
 </div>
 
-{{% blocks/link-down color="info" %}}
+{{% blocks/link-down color="primary" %}}
 
 {{% /blocks/cover %}}
 
@@ -68,9 +68,16 @@ For announcement of latest features etc.
 
 {{% /blocks/section %}}
 
-{{% blocks/section color="white" type="row text-center h1" %}}
+{{% blocks/section %}}
 
-This is the second section
+  {{% cardbanner
+            img="spruce.jpg"
+    title="Card Title"
+    subtitle="Card Subtitle"
+  %}}
+  This is a wider card with supporting text below as a natural lead-in to additional content.
+
+  {{% /cardbanner %}}
 
 {{% /blocks/section %}}
 

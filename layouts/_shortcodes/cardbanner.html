@@ -1,0 +1,43 @@
+{{ $lang := default "" (.Get "lang") -}}
+{{ $highlight := default "" (.Get "highlight") -}}
+{{ $imgPos := default "left" (.Get "imgPos") -}}
+
+<div class="card w-100 mw-100 p-3 m-0">
+{{ with $.Get "header" -}}
+  <div class="row g-0">
+    <div class="col-md-12">
+        <div class="card-header">
+        {{ . | $.Page.RenderString }}
+        </div>
+    </div>
+  </div>
+{{ end -}}
+  <div class="row g-6">
+    {{- if $imgPos = "left" -}}
+    <div class="col-md-4">
+      {{ with $.Get "img" -}}
+      <img src="{{ . -}}" class="img-fluid rounded-start" alt="...">
+      {{ end -}}
+    </div>
+    {{ end -}}
+    <div class="col-md-8">
+      <div class="card-body">
+          {{ with $.Get "title" -}}
+            <h1 class="card-title">
+              {{ . | $.Page.RenderString -}}
+            </h1>
+          {{ end -}}
+          {{ with $.Get "subtitle" -}}
+            <h3 class="card-title ms-2 text-body-secondary">
+              {{ . | $.Page.RenderString -}}
+            </h3>
+          {{ end -}}
+          {{ with $.Inner -}}
+            <p class="card-text">
+              {{ . -}}
+            </p>
+          {{ end -}}
+      </div>
+    </div>
+  </div>
+</div>
