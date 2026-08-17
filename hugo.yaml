@@ -1,14 +1,17 @@
-baseURL: https://radiocommunicationvolunteers.github.io
-title: Goldydocs
+baseURL: 'https://radiocommunicationvolunteers.github.io'
+title: 'Radio Communication Volunteers'
+theme: 'docsy'
 
 # cSpell:ignore goldmark github hugo readingtime docsy subdir lastmod pygments linenos catmullrom norsk gu slugorcontentbasename
 
 # Language settings
+layoutDir: layouts
 contentDir: content/en
 defaultContentLanguage: en
 defaultContentLanguageInSubdir: false
+
 # Useful when translating.
-enableMissingTranslationPlaceholders: true
+enableMissingTranslationPlaceholders: false
 
 enableRobotsTXT: true
 
@@ -50,33 +53,8 @@ permalinks:
 # Image processing configuration.
 imaging:
   resampleFilter: CatmullRom
-
-# Language configuration
-languages:
-  en:
-    label: English
-    title: Goldydocs
-    params:
-      description: A Docsy example site
-  # cSpell:disable
-  no:
-    label: Norsk
-    contentDir: content/no
-    title: Gulldoks
-    params:
-      description: Docsy er operativsystem for skyen
-      time_format_default: 02.01.2006
-      time_format_blog: 02.01.2006
-  fa:
-    direction: rtl
-    label: 'فارسی (Persian)'
-    contentDir: content/fa
-    title: 'اسناد گلدی'
-    params:
-      description: 'یک نمونه برای پوسته داکسی'
-      time_format_default: 2006.01.02
-      time_format_blog: 2006.01.02
-  # cSpell:enable
+  quality: 75
+  anchor: Smart
 
 markup:
   goldmark:
@@ -96,7 +74,7 @@ markup:
 
 # Comment out if you don't want the "print entire section" link enabled.
 outputs:
-  home: [HTML, print, RSS, redirects]
+  home: [HTML, print, RSS]
   section: [HTML, print, RSS]
 
 params:
@@ -110,7 +88,7 @@ params:
     # set taxonomyPageHeader = [] to hide taxonomies on the page headers
     taxonomyPageHeader: [tags, categories]
 
-  privacy_policy: https://policies.google.com/privacy
+  # privacy_policy: https://policies.google.com/privacy
 
   # First one is picked as the Twitter card image if not set on page.
   # images: [images/project-illustration.png]
@@ -130,10 +108,10 @@ params:
   version: 0.15.1-dev
 
   # Repository configuration (URLs for in-page links to opening issues and suggesting changes)
-  github_repo: https://github.com/google/docsy-example
+  github_repo: https://github.com/RadioCommunicationVolunteers
 
   # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-  github_project_repo: https://github.com/google/docsy
+  github_project_repo: https://github.com/RadioCommunicationVolunteers/radiocommunicationvolunteers.github.io
 
   # Specify a value here if your content directory is not in your repo's root directory
   # github_subdir: ""
